@@ -5,57 +5,54 @@
 // Can be edited
 
 // Container
-@if($responsive-app) {
-  .container {
-    @include container-fixed;
+@if $responsive-app {
+    .container {
+        @include make-container;
+        @include make-container-max-widths;
 
-    @media (min-width: $screen-sm-min) {
-      width: $container-sm;
+        @media (min-width: $screen-sm-min) {
+            width: $container-sm;
+        }
+
+        @media (min-width: $screen-md-min) {
+            width: $container-md;
+        }
+
+        @media (min-width: $screen-lg-min) {
+            width: $container-lg;
+        }
     }
-    @media (min-width: $screen-md-min) {
-      width: $container-md;
-    }
-    @media (min-width: $screen-lg-min) {
-      width: $container-lg;
-    }
-  }
-}@else {
-  .container {
-      @include container-fixed;
-      width: $container-lg;
-  }
 }
+@else {
+    .container {
+        @include make-container;
+        @include make-container-max-widths;
 
-.container-wide {
-  @include container-fixed;
-  max-width: $screen-lg-max;
+        width: $container-lg;
+    }
 }
 
 .container-fluid {
-  @include container-fixed;
+    @include make-container;
 }
+
 .row {
-  @include make-row;
+    @include make-row;
+
+    // Remove the negative margin from default .row, then the horizontal padding
+    // from all immediate children columns (to prevent runaway style inheritance).
+    .no-gutters {
+        margin-right: 0;
+        margin-left: 0;
+
+        > .col,
+        > [class*="col-"] {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
 }
 
-@if($responsive-app) {
-  @include make-grid-columns;
-}
-
-// Extra small grid
-@include make-grid(xs);
-
-@if($responsive-app) {
-  // Small grid
-  @media (min-width: $screen-sm-min) {
-    @include make-grid(sm);
-  }
-  // Medium grid
-  @media (min-width: $screen-md-min) {
-    @include make-grid(md);
-  }
-  // Large grid
-  @media (min-width: $screen-lg-min) {
-    @include make-grid(lg);
-  }
+@if $responsive-app {
+    @include make-grid-columns;
 }

@@ -8,7 +8,7 @@ const path = require('path');
 const config = require('./config');
 
 gulp.task('watch', ['liveReload'], () => {
-  const folders = ['css', 'img', 'svg', 'static', 'fonts', 'js'];
+  const folders = ['svg', 'spritecss', 'img', 'css', 'static', 'fonts', 'js', 'svgspriteclean'];
 
   if (config.html.run) {
     folders.push('html');
